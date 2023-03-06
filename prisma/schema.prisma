@@ -1,0 +1,59 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String    @id @default(uuid())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  email       String    @unique
+  password    String
+  deleted     Boolean   @default(false)
+  orders      Order[]
+  sheetMusic  SheetMusic[]
+}
+
+enum ORDER_STATUS {
+  RECEIVED
+  PROBLEM
+  COMPLETED
+}
+
+model Order {
+  id            String        @id @default(uuid())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  totalPrice    Int
+
+  customerId    String
+  customer      User?         @relation(fields: [customerId], references: [id])
+
+  sheetMusicId  String[]
+  sheetMusic    SheetMusic[]
+  status        ORDER_STATUS @default(RECEIVED)
+}
+
+model SheetMusic {
+  id            String        @id @default(uuid())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  noOfParts     Int
+  description   String
+  audioUrl      String?
+  coverArtUrl   String?
+  downloadUrl   String
+
+  orderId       String
+  order         Order          @relation(fields: [orderId], references: [id])
+
+  userId        String
+  user          User           @relation(fields: [userId], references: [id])
+}
