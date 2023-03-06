@@ -1,10 +1,17 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from './page.module.css'
+import { db } from '@/lib/db'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+const getData = async () => {
+  const allUsers = await db.user.findMany()
+  console.log(allUsers)
+} 
+
+export default async function Home() {
+  await getData()
   return (
     <main className={styles.main}>
       <div className={styles.description}>
