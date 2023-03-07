@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import { SignJWT, jwtVerify } from 'jose';
 import { db } from './db';
 
+
 // async by default
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
@@ -11,6 +12,7 @@ export const comparePasswords = (plainTextPassword: string, hashedPassword: stri
 // in production, have a team for this, or use a service. hard to get it right
 // max amilliano - full stack authentication course
 // clerk, SuperTokens, NextAuth
+// TODO: get type for user
 export const createJWT = (user) => {
     // return jwt.sign({ id: user.id }, 'cookies')
     const iat = Math.floor(Date.now() / 1000);
