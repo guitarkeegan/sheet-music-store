@@ -51,6 +51,7 @@ model SheetMusic {
   audioUrl      String?
   coverArtUrl   String?
   downloadUrl   String
+  cost          Float
 
   orderId       String?         @db.ObjectId
   order         Order?          @relation(fields: [orderId], references: [id])
