@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import styles from "./page.module.css";
 import { db } from "@/lib/db";
 import MusicCard from "@/components/MusicCard";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +26,14 @@ export default async function Home() {
           allSheetMusic.map((score, i) => (
             <MusicCard
               key={i}
+              id={score.id}
               title={score.title}
               cost={score.cost}
               noOfParts={score.noOfParts}
+              coverArtUrl={score.coverArtUrl || ""}
+              description={score.description}
+              audioUrl={score.audioUrl || ""}
+              downloadUrl={score.downloadUrl}
             />
           ))}
       </div>
