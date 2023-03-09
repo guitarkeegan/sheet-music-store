@@ -1,3 +1,4 @@
+import CartButton from "@/components/CartButton";
 import { db } from "@/lib/db";
 import { NextRequest } from "next/server";
 
@@ -30,7 +31,7 @@ export default async function Details({ params }: DetailsParams) {
         <div className="text-wrap sm:w-[400px]"><span className="text-xl font-bold">Description: </span>{sheetMusic?.description}</div>
         <div></div>
         <div className="text-3xl mt-12 ">Price: ${sheetMusic?.cost}</div>
-        <button className="mt-6 bg-amber-500 text-white rounded-xl px-3 py-2 text-2xl">Add to Cart</button>
+        <CartButton />
       </div>
     </section>
   );
