@@ -2,6 +2,11 @@ import bcrypt from 'bcrypt';
 import { SignJWT, jwtVerify } from 'jose';
 import { db } from './db';
 
+type UserParams = {
+  email: string,
+  password: string,
+}
+
 
 // async by default
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
@@ -13,7 +18,7 @@ export const comparePasswords = (plainTextPassword: string, hashedPassword: stri
 // max amilliano - full stack authentication course
 // clerk, SuperTokens, NextAuth
 // TODO: get type for user
-export const createJWT = (user) => {
+export const createJWT = (user: UserParams) => {
     // return jwt.sign({ id: user.id }, 'cookies')
     const iat = Math.floor(Date.now() / 1000);
     const exp = iat + 60 * 60 * 24 * 7;
