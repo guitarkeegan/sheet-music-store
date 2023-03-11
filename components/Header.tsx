@@ -1,3 +1,4 @@
+"use client"
 import logo from "@/assets/images/feel-the-awesome.jpg"
 import Image from "next/image"
 import {ImCart} from "react-icons/im"
@@ -18,7 +19,7 @@ export default function Header(){
             </div>
             </Link>
             <div className="flex gap-3 text-2xl items-center">
-                <Link className="hover:opacity-50" href={"/signup"}>Login</Link>
+                <Link className="hover:opacity-50" href={"/signup"}>Signup/Login</Link>
                 <Link className="hover:opacity-50" href={"/cart"}><ImCart /></Link>
                 </div>
         </header>

@@ -1,12 +1,16 @@
 "use client"
 import {useState} from "react"
+type CartButtonProps = {
+    music?: string
+}
 // use global state to make a bubble in the cart when something is added
-export default function CartButton(){
+export default function CartButton({music}: CartButtonProps){
     const [buttonClicked, setbuttonClicked] = useState(false)
 
     const handlebutton = () => {
         console.log("button clicked!")
         setbuttonClicked(true)
+        
     }
 
     return(

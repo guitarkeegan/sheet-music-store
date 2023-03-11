@@ -18,6 +18,7 @@ async function getData(id: string) {
 }
 export default async function Details({ params }: DetailsParams) {
   const { sheetMusic } = await getData(params.id);
+  const musicId = sheetMusic?.id
   return (
     <section className="grid grid-cols-2 gap-4 mt-12">
       <div id="left"></div>
@@ -31,7 +32,7 @@ export default async function Details({ params }: DetailsParams) {
         <div className="text-wrap sm:w-[400px]"><span className="text-xl font-bold">Description: </span>{sheetMusic?.description}</div>
         <div></div>
         <div className="text-3xl mt-12 ">Price: ${sheetMusic?.cost}</div>
-        <CartButton />
+        <CartButton music={musicId} />
       </div>
     </section>
   );

@@ -1,14 +1,16 @@
 import { NextResponse } from 'next/server'
+import { NextApiResponse } from 'next'
 import { db } from '@/lib/db'
 import { hashPassword, createJWT } from '@/lib/auth'
-import { serialize } from "cookie";
+import { serialize } from "cookie"
+import {headers} from "next/headers"
 
 type Body = {
     email: string,
     password: string,
 }
 
-export async function POST(request: Request) {
+export async function POST(request: Request, response: NextResponse) {
     const body: Body = await request.json()
     console.log(body)
   try {
@@ -30,23 +32,33 @@ export async function POST(request: Request) {
       })
       console.log("New user created", newUser)
 
-      const newResponse = new Headers(request.headers);
-
       const jwt = await createJWT(newUser);
 
-      newResponse.set(
-        "Set-Cookie",
-        serialize(process.env.COOKIE_NAME!, jwt, {
-            httpOnly: true,
-            path: "/",
-            maxAge: 60 * 60 * 24 * 7,
-          })
-      )
+      return new Response("Welcome", {
+        status: 200,
+        headers: {
+            "Set-Cookie": serialize(process.env.COOKIE_NAME as string, jwt, {
+                      httpOnly: true,
+                      path: "/",
+                      maxAge: 60 * 60 * 24 * 7,
+                    })
+        },
 
-      return NextResponse.json({message: "New User Created!"})
-    } else {
-        console.log("This email already exists in database")
-      return NextResponse.json({message: "We already have this email!"})
+      })
+
+    //   response.setHeader(
+    //     "Set-Cookie",
+    //     serialize(process.env.COOKIE_NAME as string, jwt, {
+    //       httpOnly: true,
+    //       path: "/",
+    //       maxAge: 60 * 60 * 24 * 7,
+    //     })
+    //   );
+    //   response.status(201);
+    //   response.end();
+    // } else {
+    //   response.status(402);
+    //   response.end();
     }
   } catch (error){
     console.error("error on find unique email", error)
