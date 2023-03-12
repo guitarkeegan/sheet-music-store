@@ -1,4 +1,4 @@
-"use client"
+
 import logo from "@/assets/images/feel-the-awesome.jpg"
 import Image from "next/image"
 import {ImCart} from "react-icons/im"
