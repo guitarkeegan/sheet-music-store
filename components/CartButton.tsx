@@ -1,5 +1,6 @@
 "use client"
-import {useState} from "react"
+import {useState, useContext} from "react"
+import { WordContext } from "@/app/word-provider"
 type CartButtonProps = {
     music?: string
 }
@@ -7,11 +8,12 @@ type CartButtonProps = {
 // TODO: use global state to make a bubble in the cart when something is added
 export default function CartButton({music}: CartButtonProps){
     const [buttonClicked, setbuttonClicked] = useState(false)
+    const word = useContext(WordContext)
 
     const handlebutton = () => {
         console.log("button clicked!")
         setbuttonClicked(true)
-        
+        console.log(word)
     }
 
     return(
