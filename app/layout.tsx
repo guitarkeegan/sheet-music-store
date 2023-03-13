@@ -1,6 +1,6 @@
 import Header from '@/components/Header'
 import './globals.css'
-import WordProvider from './word-provider'
+import {CartProvider, CartDispatchProvider} from './cart-provider'
 
 export const metadata = {
   title: 'Create Next App',
@@ -17,10 +17,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <WordProvider>
+        <CartDispatchProvider>
+        <CartProvider>
         <Header />
         {children}
-        </WordProvider>
+        </CartProvider>
+        </CartDispatchProvider>
         </body>
     </html>
   )

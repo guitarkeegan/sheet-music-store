@@ -1,19 +1,25 @@
 "use client"
 import {useState, useContext} from "react"
-import { WordContext } from "@/app/word-provider"
+import { CartContext, CartDispatchContext } from "@/app/cart-provider"
 type CartButtonProps = {
     music?: string
 }
+type DispatchType = (o: Object) => void;
 
 // TODO: use global state to make a bubble in the cart when something is added
 export default function CartButton({music}: CartButtonProps){
     const [buttonClicked, setbuttonClicked] = useState(false)
-    const word = useContext(WordContext)
+    const cart = useContext(CartContext)
+    const dispatch: DispatchType = useContext(CartDispatchContext)
 
     const handlebutton = () => {
         console.log("button clicked!")
         setbuttonClicked(true)
-        console.log(word)
+        dispatch({
+            type: "added",
+            id: music
+        })
+        console.log(cart)
     }
 
     return(
