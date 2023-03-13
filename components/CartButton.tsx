@@ -1,5 +1,8 @@
 "use client"
-import {useState} from "react"
+
+import { useState } from "react"
+import { useStore } from "@/src/store"
+
 type CartButtonProps = {
     music?: string
 }
@@ -7,10 +10,12 @@ type CartButtonProps = {
 // TODO: use global state to make a bubble in the cart when something is added
 export default function CartButton({music}: CartButtonProps){
     const [buttonClicked, setbuttonClicked] = useState(false)
+    const { addToOrder } = useStore()
 
     const handlebutton = () => {
         console.log("button clicked!")
         setbuttonClicked(true)
+        addToOrder(music as string)
         
     }
 
