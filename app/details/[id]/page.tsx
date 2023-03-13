@@ -1,6 +1,5 @@
 import CartButton from "@/components/CartButton";
 import { db } from "@/lib/db";
-import { NextRequest } from "next/server";
 
 type DetailsParams = {
   params: {

@@ -1,10 +1,11 @@
-
+"use client"
 import logo from "@/assets/images/feel-the-awesome.jpg"
 import Image from "next/image"
 import {ImCart} from "react-icons/im"
 import Link from "next/link"
 
-export default function Header(){
+
+export default function Header(props: {cart: string[], setCart: Function}){
     return (
         <header className="flex justify-between items-center px-6 sm:px-36 bg-gray-500 text-white py-2">
             <Link href="/">

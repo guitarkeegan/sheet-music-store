@@ -10,8 +10,8 @@ export default function CartButton({music}: CartButtonProps){
 
     const handlebutton = () => {
         console.log("button clicked!")
+        console.log(music)
         setbuttonClicked(true)
-        
     }
 
     return(

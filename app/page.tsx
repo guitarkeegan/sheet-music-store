@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { db } from "@/lib/db";
 import MusicCard from "@/components/MusicCard";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 const getData = async () => {
