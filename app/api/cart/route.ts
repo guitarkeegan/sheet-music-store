@@ -26,9 +26,7 @@ export async function POST(request: Request) {
         }
     })
 
-    console.log("db response: ", data)
-
-    return NextResponse.json({message: "message recieved!"})
+    return NextResponse.json(data)
 
 
 }
