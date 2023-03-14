@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-type Order = {
+export type Order = {
     id: string
 }
 

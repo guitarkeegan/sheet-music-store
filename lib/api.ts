@@ -1,3 +1,5 @@
+import type { Order } from "@/src/store"
+
 type FetcherParams = {
     url: string,
     body: {},
@@ -8,6 +10,10 @@ type FetcherParams = {
 type SignUpParams = {
     email: string,
     password: string,
+}
+
+type SheetMusicOrderParams = {
+    orders: Order[]
 }
 
 const fetcher = async ({url, body, method, json=true}: FetcherParams)=>{
@@ -37,4 +43,14 @@ export const signUp = async (user: SignUpParams) => {
          body: user,
          method: "POST",
     })
+}
+
+export const getCart = async (sheetmusic: SheetMusicOrderParams) => {
+    return await fetcher(
+        {
+            url: "/api/cart",
+            body: sheetmusic,
+            method: "POST",
+        }
+    )
 }
