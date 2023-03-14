@@ -1,5 +1,4 @@
 "use client"
-
 import { useStore } from "@/src/store"
 
 export default function CartItem() {
