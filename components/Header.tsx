@@ -1,8 +1,9 @@
 
 import logo from "@/assets/images/feel-the-awesome.jpg"
 import Image from "next/image"
-import {ImCart} from "react-icons/im"
+
 import Link from "next/link"
+import CartIcon from "./CartIcon"
 
 export default function Header(){
     return (
@@ -20,7 +21,7 @@ export default function Header(){
             </Link>
             <div className="flex gap-3 text-2xl items-center">
                 <Link className="hover:opacity-50" href={"/signup"}>Signup/Login</Link>
-                <Link className="hover:opacity-50" href={"/cart"}><ImCart /></Link>
+                <CartIcon />
                 </div>
         </header>
     )

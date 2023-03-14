@@ -1,4 +1,5 @@
 import Header from '@/components/Header'
+import StoreInitializer from '@/components/StoreInitializer'
 import './globals.css'
 
 
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <StoreInitializer />
         <Header />
         {children}
         </body>
