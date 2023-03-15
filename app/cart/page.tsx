@@ -36,6 +36,7 @@ export default function Cart() {
   const remove = (musicId: string) => {
     removeFromOrder(musicId)
     // TODO: remove from cart state
+    setCartData(prev => prev.filter(prev => prev.id !== musicId))
   }
 
   useEffect(()=>{
