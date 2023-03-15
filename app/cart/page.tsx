@@ -33,25 +33,27 @@ export default function Cart() {
     }
   }
 
+  const remove = (musicId: string) => {
+    removeFromOrder(musicId)
+    // TODO: remove from cart state
+  }
+
   useEffect(()=>{
     getData()
   }, [])
-
-
-
 
   return (
     <div>
       <div className="flex justify-center mt-12 font-bold">
         <h1 className="text-6xl">My Cart</h1>
       </div>
-      <div id="cart-item-wrapper">
-        { cartData ? cartData.map(item => (
-          <CartItem id={item.id} cost={item.cost} title={item.title} cover={item.coverArtUrl}/>
+      <div id="cart-item-wrapper" className="flex flex-col items-center">
+        { cartData ? cartData.map((item, i) => (
+          <CartItem key={i} id={item.id} cost={item.cost} title={item.title} remove={remove}/>
         )) :
         <div>no data</div>
         }
-        { cartData && <button>checkout</button>}
+        { cartData && <button className="mt-6 bg-amber-500 text-white rounded-xl px-3 py-2 text-2xl hover:bg-amber-300 transition-colors ease-in-out duration-700 disabled:bg-gray-400">checkout</button>}
       </div>
     </div>
   );
