@@ -1,10 +1,11 @@
 "use client"
 import { stripe } from "@/lib/stripe";
-import { getCart } from "@/lib/api";
+import { checkoutCart, getCart } from "@/lib/api";
 import { useStore } from "@/src/store";
 import type { Order } from "@/src/store";
 import { useEffect, useState } from "react";
 import CartItem from "@/components/CartItem";
+import { useRouter } from "next/navigation";
 
 export type CartDataProps = {
   id: string,
@@ -18,6 +19,8 @@ export type CartDataProps = {
 }
 
 export default function Cart() {
+
+  const router = useRouter()
 
   const { order, removeFromOrder } = useStore.getState()
   const [ cartData, setCartData ] = useState<CartDataProps[] | []>([])
@@ -33,9 +36,15 @@ export default function Cart() {
     }
   }
 
+  const handleCheckout = async () => {
+    console.log("sending checkout cart...")
+    const response = await checkoutCart({orders: order})
+    console.log(response)
+    router.replace(response.url)
+  }
+
   const remove = (musicId: string) => {
     removeFromOrder(musicId)
-    // TODO: remove from cart state
     setCartData(prev => prev.filter(prev => prev.id !== musicId))
   }
 
@@ -54,7 +63,7 @@ export default function Cart() {
         )) :
         <div>no data</div>
         }
-        { cartData && <button className="mt-6 bg-amber-500 text-white rounded-xl px-3 py-2 text-2xl hover:bg-amber-300 transition-colors ease-in-out duration-700 disabled:bg-gray-400">checkout</button>}
+        { cartData && <button onClick={handleCheckout} className="mt-6 bg-amber-500 text-white rounded-xl px-3 py-2 text-2xl hover:bg-amber-300 transition-colors ease-in-out duration-700 disabled:bg-gray-400">checkout</button>}
       </div>
     </div>
   );

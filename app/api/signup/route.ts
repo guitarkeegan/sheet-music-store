@@ -62,6 +62,6 @@ export async function POST(request: Request, response: NextResponse) {
     }
   } catch (error){
     console.error("error on find unique email", error)
-    NextResponse.json({message: "Unable to create new user!"})
+    return NextResponse.json({message: "Unable to create new user!"})
   }
 }

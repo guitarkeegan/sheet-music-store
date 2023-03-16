@@ -54,3 +54,13 @@ export const getCart = async (sheetmusic: SheetMusicOrderParams) => {
         }
     )
 }
+
+export const checkoutCart = async (sheetmusic: SheetMusicOrderParams) => {
+    return await fetcher(
+        {
+            url: "/api/checkout",
+            body: sheetmusic,
+            method: "POST"
+        }
+    )
+}

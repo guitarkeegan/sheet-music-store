@@ -25,7 +25,9 @@ export default async function middleware(req: NextRequest, res:NextResponse) {
     pathname.startsWith("/") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/static") ||
+    pathname.startsWith("/cart") ||
     pathname.startsWith("/signin") ||
+    pathname.startsWith("/details") ||
     pathname.startsWith("/login") ||
     // any public file such as images is ok
     PUBLIC_FILE.test(pathname)
