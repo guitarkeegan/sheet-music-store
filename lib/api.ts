@@ -65,3 +65,12 @@ export const checkoutCart = async (sheetmusic: SheetMusicOrderParams) => {
         }
     )
 }
+
+export const login = async (user: SignUpParams) => {
+    return await fetcher({
+      url: "/api/login",
+      method: "POST",
+      body: user,
+      json: false,
+    });
+  };

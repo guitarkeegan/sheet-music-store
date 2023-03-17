@@ -35,17 +35,18 @@ export async function POST(request: NextRequest) {
 
       console.log("Creating new JWT...")
       const jwt = await createJWT(newUser)
-
+      /* set headers instead of cookie because it was including the cookiename in the token
+      **/
       response.headers.set("Set-Cookie",
       serialize(process.env.COOKIE_NAME as string, jwt, {
         httpOnly: true,
-        path: "/",
+        path: "/dashboard",
         maxAge: 60 * 60 * 24 * 7,
       })
     )
       
       console.log(response)
-      // response sends cookie, but causes error
+      // make sure that the fetch is not expecting json
       return response
 
     } else {

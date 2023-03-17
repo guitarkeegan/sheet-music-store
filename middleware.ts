@@ -15,18 +15,18 @@ const verifyJWT = async (jwt: string) => {
   return payload;
 };
 // similar to handler
-export default async function middleware(req: NextRequest, res:NextResponse) {
+export default async function middleware(req: NextRequest) {
     // these routes are allowed to all
     // the /_next is req because of the build?
   const { pathname } = req.nextUrl;
   console.log(pathname)
   if (
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/") ||
     pathname.startsWith("/api") ||
+    pathname === "/" ||
     pathname.startsWith("/static") ||
     pathname.startsWith("/cart") ||
-    pathname.startsWith("/signin") ||
+    pathname.startsWith("/signup") ||
     pathname.startsWith("/details") ||
     pathname.startsWith("/login") ||
     // any public file such as images is ok
@@ -41,7 +41,7 @@ export default async function middleware(req: NextRequest, res:NextResponse) {
     // pathername is where the user was trying to go
     // if no jwt, they are taken to /sign-in
     // changed the request and redirected
-    req.nextUrl.pathname = "/signin";
+    req.nextUrl.pathname = "/login";
     // must be req.nextUrl
     return NextResponse.redirect(req.nextUrl);
   }

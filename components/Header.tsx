@@ -20,7 +20,8 @@ export default function Header(){
             </div>
             </Link>
             <div className="flex gap-3 text-2xl items-center">
-                <Link className="hover:opacity-50" href={"/signup"}>Signup/Login</Link>
+                <Link className="hover:opacity-50" href={"/signup"}>Signup</Link>
+                <Link className="hover:opacity-50" href={"/login"}>Login</Link>
                 <CartIcon />
                 </div>
         </header>
