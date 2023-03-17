@@ -4,6 +4,7 @@ import { db } from './db';
 import {User} from "@prisma/client"
 import { RequestCookie, RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 
+
 type UserParams = {
   email: string,
   password: string,
@@ -46,6 +47,8 @@ export const createJWT = (user: Partial<User>) => {
   
     return payload.payload as any;
   };
+
+  
 
   export const getUserFromCookie = async (cookies: RequestCookies) => {
     const jwt = cookies.get(process.env.COOKIE_NAME as string) as RequestCookie;
