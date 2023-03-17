@@ -13,7 +13,8 @@ export default function SignUpForm(){
         e.preventDefault();
         try {
             console.log("signing up user...")
-            await signUp({email, password})
+            const response = await signUp({email, password})
+            console.log(response)
             router.replace("/")
         } catch (error){
             console.error(error)

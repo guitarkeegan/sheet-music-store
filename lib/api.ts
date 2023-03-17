@@ -42,6 +42,7 @@ export const signUp = async (user: SignUpParams) => {
          url: "/api/signup",
          body: user,
          method: "POST",
+         json: false,
     })
 }
 

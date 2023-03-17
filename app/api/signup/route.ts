@@ -1,18 +1,19 @@
-import { NextResponse } from 'next/server'
-import { NextApiResponse } from 'next'
+import { NextResponse, NextRequest } from 'next/server'
 import { db } from '@/lib/db'
 import { hashPassword, createJWT } from '@/lib/auth'
 import { serialize } from "cookie"
 import {headers} from "next/headers"
+import { NextApiResponse, NextApiRequest } from 'next'
 
 type Body = {
     email: string,
     password: string,
 }
 
-export async function POST(request: Request, response: NextResponse) {
-    const body: Body = await request.json()
-    console.log(body)
+export async function POST(request: NextRequest) {
+  let response = new NextResponse()
+  const body = await request.json()
+
   try {
     // should return null if user does not exist
     const data = await db.user.findUnique({
@@ -20,7 +21,7 @@ export async function POST(request: Request, response: NextResponse) {
         email: body.email
       }
     })
-    console.log(data)
+    console.log("data is: ", data)
     if (data === null){
         console.log("no user found with that email...")
         console.log("creating new user...")
@@ -32,36 +33,43 @@ export async function POST(request: Request, response: NextResponse) {
       })
       console.log("New user created", newUser)
 
-      const jwt = await createJWT(newUser);
+      console.log("Creating new JWT...")
+      const jwt = await createJWT(newUser)
 
-      return new Response("Welcome", {
-        status: 200,
-        headers: {
-            "Set-Cookie": serialize(process.env.COOKIE_NAME as string, jwt, {
-                      httpOnly: true,
-                      path: "/",
-                      maxAge: 60 * 60 * 24 * 7,
-                    })
-        },
-
+      response.headers.set("Set-Cookie",
+      serialize(process.env.COOKIE_NAME as string, jwt, {
+        httpOnly: true,
+        path: "/",
+        maxAge: 60 * 60 * 24 * 7,
       })
+    )
+      
+      console.log(response)
+      // response sends cookie, but causes error
+      return response
 
-    //   response.setHeader(
-    //     "Set-Cookie",
-    //     serialize(process.env.COOKIE_NAME as string, jwt, {
-    //       httpOnly: true,
-    //       path: "/",
-    //       maxAge: 60 * 60 * 24 * 7,
-    //     })
-    //   );
-    //   response.status(201);
-    //   response.end();
-    // } else {
-    //   response.status(402);
-    //   response.end();
+    } else {
+      return NextResponse.json({message: "problem creating new user"})
     }
-  } catch (error){
-    console.error("error on find unique email", error)
-    return NextResponse.json({message: "Unable to create new user!"})
+  } catch (error) {
+    console.error("catch on signup", error)
   }
 }
+//       return setHeader(
+      //   "Set-Cookie",
+      //   serialize(process.env.COOKIE_NAME as string, jwt, {
+      //     httpOnly: true,
+      //     path: "/",
+      //     maxAge: 60 * 60 * 24 * 7,
+      //   })
+      // );
+//       res.status(201);
+//       res.end();
+//     } else {
+//       res.status(402);
+//       res.end();
+//     }
+// } catch (error) {
+//   console.error(error)
+//   throw new Error("error on registration")
+// }
