@@ -10,8 +10,11 @@ const getData = async () => {
       where: {
         id: user?.id
       },
+      include: {
+        sheetMusic: true
+      }
     });
-    console.log("music", music)
+    console.log("music: ", music)
     // this is good if you have multiple queries to return
     return {user, music};
   }
@@ -23,6 +26,7 @@ export default async function Dashboard(){
             dashboard
             <div>
                 {user && user.email}
+                
             </div>
         </section>
     )
