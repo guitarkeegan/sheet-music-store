@@ -7,7 +7,7 @@ import CartIcon from "./CartIcon"
 
 export default function Header(){
     return (
-        <header className="flex justify-between items-center px-6 sm:px-36 bg-gray-500 text-white py-2">
+        <header className="flex justify-between items-center px-6 sm:px-36 bg-slate-300 text-black py-2">
             <Link href="/">
             <div className="flex justify-center items-center hover:text-[#F7F83C] transition-colors ease-in-out duration-1000">
                 

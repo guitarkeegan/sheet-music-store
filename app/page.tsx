@@ -15,7 +15,7 @@ export default async function Home() {
   const {allSheetMusic} = await getData();
   console.log(allSheetMusic)
   return (
-    <main>
+    <main className="text-slate-200">
       <section>
         <div className="flex justify-center text-4xl mt-12 font-bold text-center">
           <h1>Select an Arrangement for Details</h1>

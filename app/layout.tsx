@@ -17,7 +17,7 @@ export default function RootLayout({
   
   return (
     <html lang="en">
-      <body>
+      <body className='dark:bg-slate-500'>
         <StoreInitializer />
         <Header />
         {children}

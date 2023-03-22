@@ -63,7 +63,7 @@ async function main() {
             downloadUrl:
               "https://1drv.ms/u/s!AgSX-g2vyCGnhZdiomdm1lCTnGYJKA?e=HJ7syX",
             cost: 39.99,
-            coverArtUrl: "/pdfs/tired-waltz/SYWSOL_cover.png"
+            coverArtUrl: "/images/tired_waltz_cover.png"
           },
           {
             title: "Something You Wouldn't Say Out Loud",
@@ -73,7 +73,7 @@ async function main() {
             downloadUrl:
               "https://1drv.ms/u/s!AgSX-g2vyCGnhZdgfJBONH_XBxOVaA?e=aQd9K8",
             cost: 39.99,
-            coverArtUrl: "/pdfs/SYWSOL/SYWSOL_cover.png"
+            coverArtUrl: "/images/SYWSOL_cover.png"
           },
         ]
       }
