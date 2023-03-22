@@ -1,3 +1,4 @@
+import DownloadButton from "@/components/DownloadButton";
 import { getUserFromCookie } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { cookies } from "next/headers";
@@ -30,7 +31,7 @@ export default async function Dashboard() {
         music.sheetMusic.map((chart, i) => (
           <div key={i}>
             <h1>{chart.title}</h1>
-            <a href={chart.downloadUrl} download={chart.downloadUrl}>download</a>
+            <DownloadButton downloadUrl={chart.downloadUrl} title={chart.title} />
           </div>
         ))
       ) : (
