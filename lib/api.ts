@@ -75,11 +75,3 @@ export const login = async (user: SignUpParams) => {
     });
   };
 
-export const downloadCharts = async (musicId: string) =>  {
-    return await fetcher({
-        url: "/api/download",
-        method: "POST",
-        body: musicId,
-        json: false,
-    })
-}

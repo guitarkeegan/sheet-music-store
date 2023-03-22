@@ -31,19 +31,23 @@ export async function POST(request: Request) {
     },
   });
 
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "T-shirt",
-          },
-          unit_amount: 2000,
+  const orderItems = data.map(item => (
+    {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.title
         },
-        quantity: 1,
+        unit_amount: Math.floor(item.cost * 100)
       },
-    ],
+      quantity: 1
+    }
+    ))
+
+    
+
+  const session = await stripe.checkout.sessions.create({
+    line_items: orderItems,
     mode: "payment",
     success_url: "http://localhost:3000/dashboard",
     cancel_url: "http://localhost:3000/cancellation",

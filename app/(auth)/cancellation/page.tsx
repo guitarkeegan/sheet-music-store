@@ -1,5 +1,7 @@
+import Link from "next/link"
+
 export default function Cancellation(){
     return (
-        <div>cancelled</div>
+        <Link href="/">Order cancelled, return home</Link>
     )
 }
