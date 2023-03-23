@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
       response.headers.set("Set-Cookie",
       serialize(process.env.COOKIE_NAME as string, jwt, {
         httpOnly: true,
-        path: "/dashboard",
+        path: "/",
         maxAge: 60 * 60 * 24 * 7,
       })
     )
