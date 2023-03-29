@@ -3,6 +3,7 @@ import { db } from "@/lib/db";
 import Stripe from "stripe";
 import { getUserFromCookie } from "@/lib/auth";
 import { cookies } from "next/headers";
+import { ORDER_STATUS } from "@prisma/client";
 
 const stripe = new Stripe(process.env.STRIPE_TEST_API as string, {
   apiVersion: "2022-11-15",
@@ -38,11 +39,6 @@ export async function POST(request: NextRequest) {
     },
   });
 
-  // create order
-  // const dbOrder = await db.order.create({
-
-  // })
-
   const orderItems = data.map(item => (
     {
       price_data: {
@@ -55,6 +51,29 @@ export async function POST(request: NextRequest) {
       quantity: 1
     }
     ))
+
+  type DbOrderParams = {
+    totalCost: number,
+    sheetMusicId: string[],
+    customerId?: string,
+    status: ORDER_STATUS,
+  }
+
+  const dbOrder: DbOrderParams = {
+    totalCost: 0,
+    sheetMusicId: [],
+    customerId: user?.id,
+    status: ORDER_STATUS.RECEIVED
+  }
+  
+  for (let music of data){
+    dbOrder.totalCost += music.cost
+    dbOrder.sheetMusicId.push(music.id)
+  }
+      // create order
+  // const dbOrder = await db.order.create({
+    
+  // })
 
     
 
