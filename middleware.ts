@@ -3,6 +3,7 @@
 // verify that the host for the side supports edge runtime with next js
 import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
+import path from "path";
 const PUBLIC_FILE = /\.(.*)$/;
 
 // had to make this again here as the other one is in a file with bcrypt which is not supported on edge runtimes
@@ -22,7 +23,7 @@ export default async function middleware(req: NextRequest) {
   console.log(pathname)
   if (
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
+    pathname.startsWith("/api") || 
     pathname === "/" ||
     pathname.startsWith("/static") ||
     pathname.startsWith("/cart") ||
