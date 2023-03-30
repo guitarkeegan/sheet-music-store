@@ -17,10 +17,19 @@ type Body = {
   orders: Id[];
 };
 
+type DbOrderParams = {
+  totalCost: number,
+  sheetMusicId: string[],
+  customerId?: string,
+  status: ORDER_STATUS,
+}
+
 // if you type export defaut it will say method not allowed
 export async function POST(request: NextRequest) {
 
   // TODO: check if logged in
+
+ 
 
   const user = await getUserFromCookie(cookies())
   
@@ -52,12 +61,7 @@ export async function POST(request: NextRequest) {
     }
     ))
 
-  type DbOrderParams = {
-    totalCost: number,
-    sheetMusicId: string[],
-    customerId?: string,
-    status: ORDER_STATUS,
-  }
+
 
   const dbOrder: DbOrderParams = {
     totalCost: 0,
@@ -71,11 +75,16 @@ export async function POST(request: NextRequest) {
     dbOrder.sheetMusicId.push(music.id)
   }
       // create order
-  // const dbOrder = await db.order.create({
-    
-  // })
+  const newOrder = await db.order.create({
+    data: {
+      totalPrice: dbOrder.totalCost,
+      sheetMusicId: dbOrder.sheetMusicId,
+      customerId: dbOrder.customerId,
+      status: ORDER_STATUS.RECEIVED // use this to determine what is displayed in user dashboard
+    }
+  })
 
-    
+  
 
   const session = await stripe.checkout.sessions.create({
     line_items: orderItems,
