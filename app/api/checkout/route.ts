@@ -5,6 +5,7 @@ import { getUserFromCookie } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { ORDER_STATUS } from "@prisma/client";
 
+
 const stripe = new Stripe(process.env.STRIPE_TEST_API as string, {
   apiVersion: "2022-11-15",
 });
@@ -28,8 +29,6 @@ type DbOrderParams = {
 export async function POST(request: NextRequest) {
 
   // TODO: check if logged in
-
- 
 
   const user = await getUserFromCookie(cookies())
   
@@ -62,7 +61,7 @@ export async function POST(request: NextRequest) {
     ))
 
 
-
+  // create object to update order document
   const dbOrder: DbOrderParams = {
     totalCost: 0,
     sheetMusicId: [],
@@ -77,19 +76,41 @@ export async function POST(request: NextRequest) {
       // create order
   const newOrder = await db.order.create({
     data: {
-      totalPrice: dbOrder.totalCost,
-      sheetMusicId: dbOrder.sheetMusicId,
-      customerId: dbOrder.customerId,
+      totalPrice: dbOrder.totalCost as number,
+      sheetMusicId: dbOrder.sheetMusicId as string[],
+      customerId: dbOrder.customerId as string,
       status: ORDER_STATUS.RECEIVED // use this to determine what is displayed in user dashboard
     }
   })
+  console.log("----------new order created---------")
+  console.log(newOrder)
+  console.log("getting user from database...")
+  const dbUser = await db.user.findFirst({
+    where: {
+      id: user?.id
+    }
+  })
+  if (user){
+    user.sheetMusicId.push(...dbOrder.sheetMusicId)
+
+    const updatedUser = await db.user.update({
+      where: {
+        id: dbUser?.id
+      },
+      data: {
+        sheetMusicId: user.sheetMusicId
+      }
+    })
+    console.log("updated user")
+    console.log(updatedUser)
+  }
 
   
 
   const session = await stripe.checkout.sessions.create({
     line_items: orderItems,
     mode: "payment",
-    success_url: "http://localhost:3000/dashboard",
+    success_url: "http://localhost:3000/success",
     cancel_url: "http://localhost:3000/cancellation",
   });
 
