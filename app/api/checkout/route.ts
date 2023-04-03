@@ -4,7 +4,7 @@ import Stripe from "stripe";
 import { getUserFromCookie } from "@/lib/auth";
 import { cookies } from "next/headers";
 import { ORDER_STATUS } from "@prisma/client";
-
+import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 
 const stripe = new Stripe(process.env.STRIPE_TEST_API as string, {
   apiVersion: "2022-11-15",
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
   // TODO: check if logged in
 
-  const user = await getUserFromCookie(cookies())
+  const user = await getUserFromCookie(cookies() as RequestCookies)
   
   const body: Body = await request.json();
   let searchArr;
