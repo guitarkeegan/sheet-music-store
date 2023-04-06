@@ -6,7 +6,7 @@ import Image from "next/image"
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 
 const getData = async () => {
-  // TODO: figure out type for cookies!!!
+  
   const user = await getUserFromCookie(cookies() as RequestCookies);
   console.log("user: ", user);
   const music = await db.user.findUnique({

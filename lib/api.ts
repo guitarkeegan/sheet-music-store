@@ -75,3 +75,11 @@ export const login = async (user: SignUpParams) => {
     });
   };
 
+  export const logout = async () => {
+    return await fetcher({
+      url: "/api/logout",
+      method: "POST",
+      body: {},
+      json: false,
+    });
+  };

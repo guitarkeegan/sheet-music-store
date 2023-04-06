@@ -52,7 +52,11 @@ export const createJWT = (user: Partial<User>) => {
 
   export const getUserFromCookie = async (cookies: RequestCookies) => {
     const jwt = cookies.get(process.env.COOKIE_NAME as string) as RequestCookie;
-  
+    // return null if there is no cookie
+    if (jwt === undefined){
+      return null
+    }
+
     const { id } = await validateJWT(jwt.value as string);
   
     const user = await db.user.findUnique({

@@ -2,20 +2,24 @@
 import { login } from "@/lib/api"
 import {useState} from "react"
 import { useRouter } from "next/navigation"
+// import { useAuth } from "@/src/store"
 export default function LoginForm(){
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
+    // const {loginState} = useAuth()
     const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent) => {
+        
         e.preventDefault();
         try {
             console.log("logging in user...")
             await login({email, password})
-            
-            router.replace("/dashboard")
+            // loginState()
+            window.location.replace("/")
+            // router.replace("/dashboard")
         } catch (error){
             console.error(error)
         }

@@ -10,6 +10,26 @@ type CartState = {
     removeFromOrder: (musicId: string) => void;
 }
 
+// type AuthState = {
+//     loggedIn: boolean;
+//     loginState: () => void;
+//     logoutState: () => void;
+// }
+
+// export const useAuth = create<AuthState>((set) => ({
+//     loggedIn: false,
+//     loginState: () => {
+//         set((state) => ({
+//             loggedIn: true
+//         }))
+//     },
+//     logoutState: () => {
+//         set((state) => ({
+//             loggedIn: false
+//         }))
+//     }
+// }))
+
 export const useStore = create<CartState>((set) => ({
     order: [],
     addToOrder: (musicId: string) => {

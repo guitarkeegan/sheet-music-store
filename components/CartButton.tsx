@@ -7,7 +7,7 @@ type CartButtonProps = {
     music?: string
 }
 
-// TODO: use global state to make a bubble in the cart when something is added
+
 export default function CartButton({music}: CartButtonProps){
     const [buttonClicked, setbuttonClicked] = useState(false)
     const { addToOrder } = useStore()
