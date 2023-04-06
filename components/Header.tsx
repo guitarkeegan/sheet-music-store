@@ -37,7 +37,6 @@ export default async function Header(){
                 </div>
                 :
                 <div className="flex gap-3 text-2xl items-center">
-                
                 <LogoutButton />
                 <CartIcon />
                 </div>

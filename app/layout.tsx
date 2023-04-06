@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className='dark:bg-slate-500'>
         <StoreInitializer />
+        {/* @ts-expect-error Server Component */}
         <Header />
         {children}
         </body>
