@@ -20,7 +20,7 @@ export default async function Details({ params }: DetailsParams) {
   const { sheetMusic } = await getData(params.id);
   const musicId = sheetMusic?.id
   return (
-    <section className="grid grid-cols-2 gap-4 mt-12">
+    <section className="md:grid md:grid-cols-2 md:flex-none flex flex-col items-center gap-4 mt-12 md:mb-0 mb-12">
       <div id="left" className="flex justify-center">
         <Image src={sheetMusic?.coverArtUrl as string} alt={sheetMusic?.title as string}
         height={800}

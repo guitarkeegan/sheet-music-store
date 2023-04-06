@@ -17,7 +17,7 @@ export default async function Header(){
     
     const user = await getUserData()
     return (
-        <header className="flex justify-between items-center px-6 sm:px-36 bg-slate-300 text-black py-2">
+        <header className="flex sm:flex-row flex-col justify-between items-center px-6 sm:px-36 bg-slate-300 text-black py-2">
             <Link href="/">
             <div className="flex justify-center items-center hover:text-[#F7F83C] transition-colors ease-in-out duration-1000">
                 
@@ -30,7 +30,7 @@ export default async function Header(){
             </div>
             </Link>
             { !user ?
-            <div className="flex gap-3 text-2xl items-center">
+            <div className="flex gap-3 text-2xl items-center sm:mb-0 mb-4">
                 <Link className="hover:opacity-50" href={"/signup"}>Signup</Link>
                 <Link className="hover:opacity-50" href={"/login"}>Login</Link>
                 <CartIcon />
