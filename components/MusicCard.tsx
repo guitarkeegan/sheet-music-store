@@ -14,7 +14,7 @@ type MusicCardProps = {
 export default function MusicCard(props: MusicCardProps){
     return (
         <Link href={`/details/${props.id}`}>
-        <div className="hover:scale-110 ease-out duration-500 rounded-lg shadow-lg max-w-[280px] sm:py-0 py-12">
+        <div className="lg:hover:scale-110 ease-out duration-500 rounded-lg shadow-lg max-w-[280px] sm:py-0 py-12">
             <Image alt="sheet music preview" src={props.coverArtUrl as string} id="image"
             width={280}
             height={200}
